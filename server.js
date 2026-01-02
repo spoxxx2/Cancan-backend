@@ -1,83 +1,117 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: "20mb" }));
-app.use(express.static(__dirname));
+app.use(express.json({ limit: "10mb" }));
 
-// --- Supabase client ---
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+// ------------------------------------------------------------
+// SUPABASE CLIENT
+// ------------------------------------------------------------
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 
-// ============================================================
-//  FIELD LOG ENDPOINT — CANCAN ORGANISM INPUT
-// ============================================================
+// ------------------------------------------------------------
+// ROOT CHECK
+// ------------------------------------------------------------
+app.get("/", (req, res) => {
+  res.json({ ok: true, message: "CANCAN backend alive" });
+});
+
+// ------------------------------------------------------------
+// ORGANISM STATUS
+// ------------------------------------------------------------
+app.get("/organism-status", (req, res) => {
+  res.json({
+    ok: true,
+    status: "alive",
+    time: Date.now()
+  });
+});
+
+// ------------------------------------------------------------
+// FIELD LOG INGESTION
+// ------------------------------------------------------------
 app.post("/api/cancan", async (req, res) => {
-  const entry = {
-    ...req.body,
-    received_at: Date.now()
-  };
+  try {
+    const { unit, filename, payload, received_at } = req.body;
 
-  const { data, error } = await supabase
-    .from("field_logs")
-    .insert([entry]);
+    const { data, error } = await supabase
+      .from("field_logs")
+      .insert([
+        {
+          unit,
+          filename,
+          payload,
+          received_at: received_at || Date.now()
+        }
+      ])
+      .select();
 
-  if (error) {
-    console.error("Supabase insert error:", error.message);
-    return res.json({ ok: false, error: error.message });
+    if (error) throw error;
+
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error("field_logs error:", err);
+    res.status(500).json({ ok: false, error: err.message });
   }
-
-  console.log(`💚 Log received from ${entry.unit}: ${entry.filename}`);
-  res.json({ ok: true, data });
 });
 
-// ============================================================
-//  SYSTEM LOGS — INTERNAL ORGANISM MEMORY
-// ============================================================
+// ------------------------------------------------------------
+// SYSTEM LOG WRITE
+// ------------------------------------------------------------
 app.post("/system-log", async (req, res) => {
-  const { level, module, message, context } = req.body;
+  try {
+    const { level, module, message, context } = req.body;
 
-  const { data, error } = await supabase
-    .from("system_logs")
-    .insert([{ level, module, message, context }]);
+    const { data, error } = await supabase
+      .from("system_logs")
+      .insert([
+        {
+          level,
+          module,
+          message,
+          context
+        }
+      ])
+      .select();
 
-  if (error) return res.json({ ok: false, error: error.message });
-  res.json({ ok: true, log: data[0] });
+    if (error) throw error;
+
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error("system_logs error:", err);
+    res.status(500).json({ ok: false, error: err.message });
+  }
 });
 
+// ------------------------------------------------------------
+// SYSTEM LOG LIST
+// ------------------------------------------------------------
 app.get("/system-log-list", async (req, res) => {
-  const { data, error } = await supabase
-    .from("system_logs")
-    .select("*")
-    .order("timestamp", { ascending: false })
-    .limit(200);
+  try {
+    const { data, error } = await supabase
+      .from("system_logs")
+      .select("*")
+      .order("timestamp", { ascending: false })
+      .limit(200);
 
-  if (error) return res.json({ ok: false, error: error.message });
-  res.json({ ok: true, logs: data });
+    if (error) throw error;
+
+    res.json({ ok: true, data });
+  } catch (err) {
+    console.error("system-log-list error:", err);
+    res.status(500).json({ ok: false, error: err.message });
+  }
 });
 
-// ============================================================
-//  ORGANISM STATUS — SIMPLE HEALTH CHECK
-// ============================================================
-app.get("/organism-status", async (req, res) => {
-  res.json({ ok: true, status: "alive", time: Date.now() });
-});
-
-// ============================================================
-//  SERVE DASHBOARD
-// ============================================================
-app.use("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-
-// ============================================================
-//  START SERVER (Render-compatible)
-// ============================================================
+// ------------------------------------------------------------
+// START SERVER
+// ------------------------------------------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`💚 CANCAN backend running on port ${PORT}`);
+  console.log(\`💚 CANCAN backend running on port \${PORT}\`);
 });
