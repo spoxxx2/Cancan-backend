@@ -1,4 +1,4 @@
-require("dotenv").config();
+console.log("SERVER.JS STARTING...");require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
