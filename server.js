@@ -62,3 +62,8 @@ app.get('/admin/volunteers', async (req, res) => {
   res.json({ success: true, volunteers: data });
 });
 
+console.log("SERVER.JS ABOUT TO LISTEN...");
+
+app.listen(PORT, () => {
+  console.log(`SERVER.JS LISTENING ON PORT ${PORT}`);
+});
