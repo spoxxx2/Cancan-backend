@@ -1,21 +1,18 @@
-import { requireAdmin } from "@/lib/admin-check";
-import AdminNav from "@/components/AdminNav";
+import { ReactNode } from "react"
+import AdminNav from "@/components/AdminNav"
+import { requireAdmin } from "@/lib/admin-check"
 
-export default async function AdminLayout({ children }) {
-  const isAdmin = await requireAdmin();
+export default async function AdminLayout({ children }: { children: ReactNode }) {
+  const isAdmin = await requireAdmin()
 
-  if (!isAdmin) {
-    return (
-      <div className="p-10 text-red-600 text-xl">
-        Access denied — admin only.
-      </div>
-    );
+    // TODO: handle unauthorized access
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div>
       <AdminNav />
-      <main className="flex-1 p-8 bg-gray-50">{children}</main>
+      {children}
     </div>
-  );
+  )
 }
+
