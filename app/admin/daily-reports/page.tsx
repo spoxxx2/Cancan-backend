@@ -1,8 +1,8 @@
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server"
 
 export default async function DailyReportsPage() {
-  const supabase = supabaseServer();
-  const { data: reports } = await supabase.from("daily_reports").select("*");
+  const supabase = createClient()
+  const { data: reports } = await supabase.from("daily_reports").select("*")
 
   return (
     <div>
@@ -11,5 +11,6 @@ export default async function DailyReportsPage() {
         {JSON.stringify(reports, null, 2)}
       </pre>
     </div>
-  );
+  )
 }
+

@@ -1,8 +1,8 @@
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server"
 
 export default async function EventsPage() {
-  const supabase = supabaseServer();
-  const { data: events } = await supabase.from("events").select("*");
+  const supabase = createClient()
+  const { data: events } = await supabase.from("events").select("*")
 
   return (
     <div>
@@ -11,5 +11,6 @@ export default async function EventsPage() {
         {JSON.stringify(events, null, 2)}
       </pre>
     </div>
-  );
+  )
 }
+

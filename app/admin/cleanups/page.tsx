@@ -1,8 +1,8 @@
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server"
 
 export default async function CleanupsPage() {
-  const supabase = supabaseServer();
-  const { data: cleanups } = await supabase.from("cleanups").select("*");
+  const supabase = createClient()
+  const { data: cleanups } = await supabase.from("cleanups").select("*")
 
   return (
     <div>
@@ -11,5 +11,6 @@ export default async function CleanupsPage() {
         {JSON.stringify(cleanups, null, 2)}
       </pre>
     </div>
-  );
+  )
 }
+

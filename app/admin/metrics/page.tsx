@@ -1,8 +1,8 @@
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server"
 
 export default async function MetricsPage() {
-  const supabase = supabaseServer();
-  const { data: metrics } = await supabase.from("metrics").select("*");
+  const supabase = createClient()
+  const { data: metrics } = await supabase.from("metrics").select("*")
 
   return (
     <div>
@@ -11,5 +11,6 @@ export default async function MetricsPage() {
         {JSON.stringify(metrics, null, 2)}
       </pre>
     </div>
-  );
+  )
 }
+

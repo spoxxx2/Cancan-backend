@@ -1,8 +1,8 @@
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server"
 
 export default async function DoisPage() {
-  const supabase = supabaseServer();
-  const { data: dois } = await supabase.from("dois").select("*");
+  const supabase = createClient()
+  const { data: dois } = await supabase.from("dois").select("*")
 
   return (
     <div>
@@ -11,5 +11,6 @@ export default async function DoisPage() {
         {JSON.stringify(dois, null, 2)}
       </pre>
     </div>
-  );
+  )
 }
+
