@@ -4,7 +4,7 @@
   "description": "CANCAN AI backend running on IONOS Web Hosting using Passenger",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.89.0",
