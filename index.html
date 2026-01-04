@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CANCAN HQ — Neon Pulse Dashboard v4</title>
+<style>
+    body {
+        background: #0d0d0d;
+        color: #c8ffc8;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #39ff14;
+        text-shadow: 0 0 10px #39ff14;
+    }
+
+    .pulse {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .entry {
+        background: #111;
+        border-left: 4px solid #39ff14;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 8px;
+        background: #39ff14;
+        color: #000;
+        font-weight: bold;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    .summary-box {
+        background: #111;
+        padding: 10px;
+        border: 1px solid #39ff14;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>💚⚡ CANCAN HQ — Neon Pulse Dashboard v4</h1>
+
+<div class="pulse" id="pulse">Waiting for data...</div>
+
+<div>
+    <span class="badge">Unit: cancan-field-unit-01</span>
+    <span class="badge" id="versionBadge">Version: cancan</span>
+    <span class="badge" id="moodBadge">Mood: ...</span>
+</div>
+
+<h2>Recent Activity</h2>
+<div id="feed"></div>
+
+<h2>Daily Summary</h2>
+<div class="summary-box" id="summaryBox">Loading...</div>
+
+<script>
+async function loadFeed() {
+    const res = await fetch("/dashboard/feed");
+    const data = await res.json();
+
+    // Pulse flash
+    document.getElementById("pulse").innerHTML = "💚⚡ Live Pulse — " + new Date().toLocaleTimeString();
+
+    // Mood + version
+    document.getElementById("moodBadge").innerHTML = "Mood: " + data.mood;
+    document.getElementById("versionBadge").innerHTML = "Version: " + data.version;
+
+    // Feed entries
+    const feedDiv = document.getElementById("feed");
+    feedDiv.innerHTML = "";
+
+    data.entries.forEach(e => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+    <img src="/logs/${e.filename}" style="max-width: 100%; border: 2px solid #39ff14; margin-bottom: 10px;">
+    <strong>${e.filename}</strong><br>
+    Time: ${new Date(e.timestamp * 1000).toLocaleString()}<br>
+    Mood: ${e.mood}<br>
+    Caption: ${e.caption || "No caption"}<br>
+`;
+        feedDiv.appendChild(div);
+    });
+}
+
+async function loadSummary() {
+    const res = await fetch("/summaries");
+    const data = await res.json();
+
+    const box = document.getElementById("summaryBox");
+    box.innerHTML = `
+        Date: ${data.date}<br>
+        Total Logs: ${data.total_logs}<br>
+        Mood: ${data.mood}<br>
+        Version: ${data.version}
+    `;
+}
+
+// Refresh every 5 seconds
+setInterval(() => {
+    loadFeed();
+    loadSummary();
+}, 5000);
+
+loadFeed();
+loadSummary();
+</script>
+
+</body>
+</html>

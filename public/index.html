@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CANCAN Civic Organism Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { margin:0; padding:24px; background:#020617; color:#e5e7eb; font-family:system-ui; }
+    .wrap { max-width:1200px; margin:0 auto; }
+    h1 { font-size:1.8rem; margin-bottom:4px; }
+    .subtitle { color:#9ca3af; margin-bottom:24px; }
+    .grid { display:grid; grid-template-columns:1.4fr 1fr; gap:20px; }
+    @media(max-width:900px){ .grid{ grid-template-columns:1fr; } }
+    .card { background:#0f172a; border-radius:16px; padding:18px; border:1px solid #1f2937; }
+    .card header { display:flex; justify-content:space-between; margin-bottom:12px; }
+    .pill { padding:3px 9px; border-radius:999px; background:rgba(34,197,94,0.12); color:#22c55e; font-size:0.7rem; }
+    .pill.bad { background:rgba(248,113,113,0.12); color:#f87171; }
+    .status-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; }
+    .status-item { background:#111827; border-radius:12px; padding:10px; }
+    .status-label { color:#9ca3af; font-size:0.7rem; text-transform:uppercase; }
+    .status-value { font-size:1rem; font-weight:600; }
+    .list { max-height:260px; overflow-y:auto; }
+    .row { padding:8px 0; border-bottom:1px solid #1f2937; font-size:0.8rem; }
+    .row-title { font-weight:500; }
+    .row-meta { color:#9ca3af; font-size:0.72rem; }
+    .badge { padding:2px 7px; border-radius:999px; font-size:0.7rem; border:1px solid #1f2937; }
+    .badge.green { color:#22c55e; border-color:rgba(34,197,94,0.6); }
+    .badge.red { color:#f87171; border-color:rgba(248,113,113,0.6); }
+    .badge.yellow { color:#facc15; border-color:rgba(250,204,21,0.6); }
+    button.refresh { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.7); color:#22c55e; border-radius:999px; padding:4px 10px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>💚⚡ CANCAN Civic Organism</h1>
+    <div class="subtitle">Live organism status for Bakersfield.</div>
+
+    <div class="grid">
+      <div>
+        <div class="card">
+          <header>
+            <div class="card-title">Organism status <span id="status-pill" class="pill">ALIVE</span></div>
+            <button id="refresh-btn" class="refresh">Refresh</button>
+          </header>
+          <div id="status-grid" class="status-grid"></div>
+          <div id="status-error" style="color:#f87171; display:none;"></div>
+        </div>
+
+        <div style="height:10px;"></div>
+
+        <div class="card">
+          <header><div class="card-title">System reflex memory</div></header>
+          <div id="logs-list" class="list"></div>
+          <div id="logs-error" style="color:#f87171; display:none;"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <header><div class="card-title">DOI archive</div></header>
+          <div id="doi-list" class="list"></div>
+          <div id="doi-error" style="color:#f87171; display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const BACKEND_BASE_URL = "https://YOUR-BACKEND-URL-HERE";
+
+  async function fetchJSON(path){
+    const res = await fetch(BACKEND_BASE_URL + path);
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return res.json();
+  }
+
+  function setStatus(ok){
+    const pill = document.getElementById("status-pill");
+    pill.textContent = ok ? "ALIVE" : "DEGRADED";
+    pill.className = ok ? "pill" : "pill bad";
+  }
+
+  function renderStatus(data){
+    const o = data.organism || {};
+    const grid = document.getElementById("status-grid");
+    const items = [
+      ["Spine events","spine_events"],
+      ["Cleanup actions","cleanup_actions"],
+      ["Heartbeat pulses","heartbeat_pulses"],
+      ["Metrics logged","metrics_logged"],
+      ["Volunteers","volunteers_active"],
+      ["Blocks mapped","blocks_mapped"]
+    ];
+    grid.innerHTML = items.map(([label,key])=>`
+      <div class="status-item">
+        <div class="status-label">${label}</div>
+        <div class="status-value">${o[key] ?? "—"}</div>
+      </div>
+    `).join("");
+  }
+
+  function badge(level){
+    if(level==="error") return '<span class="badge red">error</span>';
+    if(level==="warn") return '<span class="badge yellow">warn</span>';
+    return '<span class="badge green">ok</span>';
+  }
+
+  function renderLogs(data){
+    const logs = data.logs || [];
+    const list = document.getElementById("logs-list");
+    list.innerHTML = logs.map(l=>`
+      <div class="row">
+        <div class="row-title">${badge(l.level)} ${l.module} — ${l.message}</div>
+        <div class="row-meta">${new Date(l.timestamp).toLocaleString()}</div>
+      </div>
+    `).join("");
+  }
+
+  function renderDois(data){
+    const dois = data.dois || [];
+    const list = document.getElementById("doi-list");
+    list.innerHTML = dois.map(d=>`
+      <div class="row">
+        <div class="row-title">${d.title || "(untitled)"}</div>
+        <div class="row-meta">${d.doi || ""}</div>
+      </div>
+    `).join("");
+  }
+
+  async function refreshAll(){
+    const btn = document.getElementById("refresh-btn");
+    btn.disabled = true; btn.textContent = "Refreshing…";
+
+    try{
+      const [status,logs,dois] = await Promise.all([
+        fetchJSON("/organism-status"),
+        fetchJSON("/system-log-list"),
+        fetchJSON("/doi-list")
+      ]);
+
+      setStatus(true);
+      renderStatus(status);
+      renderLogs(logs);
+      renderDois(dois);
+
+    }catch(e){
+      setStatus(false);
+      document.getElementById("status-error").textContent = "Backend unreachable.";
+      document.getElementById("status-error").style.display = "block";
+    }
+
+    btn.disabled = false; btn.textContent = "Refresh";
+  }
+
+  document.getElementById("refresh-btn").onclick = refreshAll;
+  refreshAll();
+</script>
+</body>
+</html>
