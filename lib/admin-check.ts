@@ -6,5 +6,5 @@ export async function requireAdmin() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return git pushuser && user.email === "spox1@protonmail.com";}
-
+  return !!user && user.email === "spoxxx2@gmail.com";
+}
