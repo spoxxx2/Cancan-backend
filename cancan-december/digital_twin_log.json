@@ -1,0 +1,45 @@
+{
+  "detection_event": "2026-01-10_T2359",
+  "master_strategy_status": "Hardwired",
+  "gallery_config": {
+    "fog_intensity": "8px",
+    "spectral_overlay": "True",
+    "boost_factor": "1.5x"
+  },
+  "objects": [
+    {
+      "label": "Industrial Bolt",
+      "material": "Ferrous Metal",
+      "sub_type": "Steel (Zinc Coated)",
+      "condition": "Active Oxidation",
+      "spectral_fingerprint": {
+        "fe_absorption": "842nm",
+        "zinc_depletion": "42%",
+        "thermal_signature": "Stable"
+      },
+      "weathering_forecast_2076": {
+        "appearance": "Mineralized Oxide Crust",
+        "structural_integrity": "2%",
+        "danger_level": "Low (Soil Bio-Available)",
+        "environmental_impact_score": 12
+      }
+    },
+    {
+      "label": "Water Bottle",
+      "material": "Polymer",
+      "sub_type": "PET #1",
+      "condition": "UV-Degraded",
+      "spectral_fingerprint": {
+        "polymer_chain_length": "Reduced",
+        "uv_reflectance": "High",
+        "microplastic_shed_rate": "Accelerated"
+      },
+      "weathering_forecast_2076": {
+        "appearance": "Microplastic Suspension",
+        "structural_integrity": "0%",
+        "danger_level": "Critical (Oceanic Entry)",
+        "environmental_impact_score": 98
+      }
+    }
+  ]
+}

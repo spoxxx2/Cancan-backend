@@ -8,23 +8,24 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 def check_scale():
     try:
         supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-        response = supabase.table("debris_logs").select("estimated_value", count="exact").execute()
-        
+        # We query the exact count of items currently in the Digital Twin
+        response = supabase.table("debris_logs").select("id", count="exact").execute()
         count = response.count
-        total_value = sum([item['estimated_value'] for item in response.data if item['estimated_value']])
         
-        print(f"\n--- CANCANKERN SCALE MONITOR ---")
-        print(f"Current Objects: {count} / 100")
-        print(f"Digital Mine Worth: ${total_value:.2f} USD")
+        print(f"\n[ SYSTEM STATUS: {count}/100 OBJECTS SYNCED ]")
         
         if count >= 100:
-            print("\n🚨 STRATEGIC MILESTONE REACHED: 100 OBJECTS 🚨")
-            print("Action: Export Prospectus and initiate Data Sales contact.")
+            print("\n" + "!"*60)
+            print("🚀 INDUSTRIAL THRESHOLD BREACHED: 100 OBJECTS LOGGED")
+            print("STRATEGY: EXPORT PROSPECTUS AND CONTACT RECYCLING PARTNERS")
+            print("RUN: python3 generate_prospectus.py")
+            print("!"*60 + "\n")
         else:
-            print(f"Progress: { (count/100)*100:.1f}% to Industrial Scale.")
+            remaining = 100 - count
+            print(f"📡 ADAPTIVE UPDATE: {remaining} more objects required for Market Prospectus readiness.")
             
     except Exception as e:
-        print(f"❌ Monitor Error: {e}")
+        print(f"⚠️ Scale Monitor Idle: Ensure Schema Injection is complete.")
 
 if __name__ == "__main__":
     check_scale()

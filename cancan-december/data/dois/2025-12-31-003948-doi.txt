@@ -1,0 +1,13 @@
+CANCAN DOI RECORD
+=================
+Simulated Event: 50
+Simulated Timestamp: Wed Dec 31 00:39:48 PST 2025
+Recorded At: Bakersfield, CA
+Block: 1501 Pearl St (CANCAN HQ)
+Organism: CANCAN — Turning trash into town aid
+
+Recorded By: SpoX1 (Founder)
+Mode: quickna-dog (simulated field capture)
+
+Description:
+Simulated DOI event 50 generated to represent activity earlier today.

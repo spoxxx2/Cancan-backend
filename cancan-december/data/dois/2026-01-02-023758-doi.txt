@@ -1,0 +1,15 @@
+CANCAN DOI RECORD
+=================
+Date: 2026-01-02
+Timestamp: Fri Jan  2 02:37:58 PST 2026
+
+Location: Bakersfield, CA
+Block: 1501 Pearl St (CANCAN HQ)
+Organism: CANCAN — Turning trash into town aid
+
+Recorded By: SpoX1 (Founder)
+Mode: quickna-dog (fast field capture)
+
+Description:
+Automatic DOI capture logged at Fri Jan  2 02:37:58 PST 2026 in Bakersfield, CA.
+

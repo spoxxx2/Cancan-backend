@@ -1,0 +1,13 @@
+{
+    "recyclers": [
+        {"name": "Kern County Recycling Ops", "email": "procurement@kernrecycle.example", "interest": "PET/Aluminum Purity"},
+        {"name": "Western Polymer Group", "email": "data-ingest@westernpoly.example", "interest": "Industrial Volume"}
+    ],
+    "esg_analysts": [
+        {"name": "GreenHorizon ESG", "email": "audits@greenhorizon.example", "interest": "50-Year Forecasts"},
+        {"name": "CarbonPath Logistics", "email": "offset-verify@carbonpath.example", "interest": "Carbon Displacement"}
+    ],
+    "traders": [
+        {"name": "Global Scrapyard Indices", "email": "market-feed@gsi-trading.example", "interest": "Daily Market Value"}
+    ]
+}
