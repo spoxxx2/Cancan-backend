@@ -1,0 +1,9 @@
+{
+    "recyclers": [
+        {"name": "Kern County Recycling Group", "contact": "procurement@kernrecycle.org", "interest": "PET/HDPE Purity"},
+        {"name": "Pacific Circular Systems", "contact": "data-buy@pacificcircular.com", "interest": "Aluminum Yield"}
+    ],
+    "esg_firms": [
+        {"name": "GreenTrust Auditors", "contact": "compliance@greentrust.io", "interest": "50-Year Risk Forecasts"}
+    ]
+}
