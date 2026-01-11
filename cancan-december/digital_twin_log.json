@@ -1,26 +1,36 @@
 {
-  "detection_event": "2026-01-10_T2100",
+  "detection_event": "2026-01-10_T2200",
   "founder_message": "As of Jan 10, 2026: Data is the new recovery.",
   "gallery_config": {
     "fog_intensity": "8px",
-    "forecast_horizon": "50_years"
+    "forecast_horizon": "50_years",
+    "spectral_calibration": "Active"
   },
   "objects": [
     {
       "label": "Water Bottle",
       "material": "Polymer",
       "sub_type": "PET #1",
-      "condition": "Soiled / Crushed",
-      "estimated_value": "$0.05",
-      "contamination_risk": "Low",
+      "condition": "Soiled",
       "weathering_forecast_2076": {
-        "appearance": "Fragmented / Microplastic Suspension",
+        "appearance": "Microplastic Suspension",
         "structural_integrity": "15%",
-        "danger_level": "High (Leaching)",
+        "danger_level": "High (Leaching)"
+      }
+    },
+    {
+      "label": "Industrial Bolt",
+      "material": "Ferrous Metal",
+      "sub_type": "Steel (Zinc Coated)",
+      "condition": "Corroded",
+      "hyperspectral_fingerprint": "FE-092-2026",
+      "weathering_forecast_2076": {
+        "appearance": "Mineralized Oxide (Rust Pile)",
+        "structural_integrity": "2%",
+        "danger_level": "Low (Soil Enrichment)",
         "estimated_worth": "$0.00"
       },
-      "suggested_bin": "Circular Economy"
+      "suggested_bin": "Scrap Metal"
     }
-  ],
-  "environmental_impact_score": 82
+  ]
 }
