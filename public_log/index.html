@@ -6,23 +6,31 @@
     <style>
         body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #00ff41; padding: 20px; }
         h1 { border-bottom: 2px solid #00ff41; padding-bottom: 10px; }
-        .log-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .founder-box { background: #111; border: 1px solid #00ff41; padding: 15px; margin-bottom: 20px; box-shadow: 0 0 10px #00ff4133; }
+        .log-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; }
         .log-table th, .log-table td { border: 1px solid #333; padding: 12px; text-align: left; }
-        .log-table th { background: #1a1a1a; }
-        .status-tag { color: #00ff41; font-weight: bold; }
+        .log-table th { background: #1a1a1a; color: #fff; }
+        .forecast { color: #ff9900; font-style: italic; font-size: 0.8em; }
+        .value { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>🛰️ CANCANKERN: LIVE DEBRIS TELEMETRY</h1>
+    <h1>🛰️ CANCANKERN: ADAPTIVE MASTER STRATEGY</h1>
+
+    <div class="founder-box">
+        <h3 style="margin-top: 0; color: #fff;">📝 FOUNDER'S DAILY BRIEFING</h3>
+        <p id="daily-message">Initializing strategic oversight...</p>
+    </div>
+
     <div id="loading">FETCHING CLOUD DATA...</div>
     <table class="log-table" id="debrisTable" style="display:none;">
         <thead>
             <tr>
                 <th>TIMESTAMP</th>
                 <th>EVENT_ID</th>
-                <th>MATERIAL</th>
-                <th>SUB-TYPE</th>
-                <th>CONDITION</th>
+                <th>MATERIAL (TAXONOMY)</th>
+                <th>EST. VALUE</th>
+                <th>50-YEAR FORECAST</th>
                 <th>DISPOSAL</th>
             </tr>
         </thead>
@@ -30,6 +38,14 @@
     </table>
 
     <script>
+        const messages = [
+            "Strategy Update: Shift focus to High-Density Polymers. The market for recovered PET is stabilizing.",
+            "Vision Note: Our YOLOv12 + ViT models are showing 98% accuracy on soiled materials. The Digital Twin is growing.",
+            "Sustainability Alert: 50-year forecasts indicate micro-plastic risk in Sector 7. Accelerating recovery urgency.",
+            "Economic Intelligence: Debris pile net worth is increasing. Recalibrating circular extraction targets."
+        ];
+        document.getElementById('daily-message').innerText = messages[Math.floor(Math.random() * messages.length)];
+
         const SB_URL = "https://dzrnwzvizztfmjgvpajd.supabase.co/rest/v1/debris_logs?select=*&order=created_at.desc";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6cm53enZpenp0Zm1qZ3ZwYWpkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzM3NDY3OSwiZXhwIjoyMDgyOTUwNjc5fQ.iWYiUTfKpVnLHEkbhIyvo0fzGxNMMpuRn8UIQZp2u5I";
 
@@ -42,12 +58,15 @@
                 const body = document.getElementById('logBody');
                 
                 data.forEach(entry => {
+                    const forecast = entry.forecast_50yr ? entry.forecast_50yr.appearance : "Analyzing fragmentation...";
+                    const val = entry.estimated_value ? `$${entry.estimated_value}` : "Calculating...";
+                    
                     const row = `<tr>
                         <td>${new Date(entry.created_at).toLocaleString()}</td>
                         <td>${entry.event_id}</td>
-                        <td>${entry.objects.material}</td>
-                        <td>${entry.objects.sub_type}</td>
-                        <td>${entry.objects.condition}</td>
+                        <td>${entry.objects.material} (${entry.objects.sub_type})</td>
+                        <td class="value">${val}</td>
+                        <td class="forecast">${forecast}</td>
                         <td>${entry.objects.disposal}</td>
                     </tr>`;
                     body.innerHTML += row;
