@@ -1,0 +1,8 @@
+{
+  "name": "cancan-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "python3 vision_core.py",
+    "build": "pip install -r requirements.txt"
+  }
+}
