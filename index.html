@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GodVision | Bakersfield Debris Audit</title>
+    <title>GodVision | Bakersfield Protocol</title>
     <style>
-        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 20px; overflow-x: hidden; }
-        .container { border: 2px solid #00ff41; padding: 25px; box-shadow: inset 0 0 10px #00ff41, 0 0 20px #00ff41; }
-        .glitch { font-size: 1.2em; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #00ff41; margin-bottom: 15px; }
-        .terminal-box { background: rgba(0, 255, 65, 0.05); border: 1px solid #00ff41; padding: 15px; min-height: 100px; margin: 10px 0; }
-        .label { color: #fff; background: #00ff41; color: #000; padding: 2px 5px; font-weight: bold; margin-right: 10px; }
-        .forecast-text { color: #ffcc00; display: block; margin-top: 10px; }
-        .calibration-data { font-size: 0.7em; opacity: 0.7; margin-top: 20px; }
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 20px; }
+        .container { border: 2px solid #00ff41; padding: 25px; box-shadow: 0 0 20px #00ff41; }
+        .glitch { font-size: 1.2em; font-weight: bold; border-bottom: 1px solid #00ff41; margin-bottom: 15px; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .stat-item { border: 1px solid #00ff41; padding: 10px; font-size: 0.8em; }
+        #live-feed { color: #fff; background: rgba(0,255,65,0.1); padding: 15px; min-height: 50px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="glitch">📡 GODVISION v1.0 // BAKERSFIELD PROTOCOL</div>
-        <p>LOCATION: KERN RIVER BASIN | STATUS: <span style="color:#00ff41; text-shadow: 0 0 5px #00ff41;">ONLINE</span></p>
+        <div class="glitch">📡 GODVISION v1.0 // TOTAL IMPACT AUDIT</div>
         
-        <div class="terminal-box">
-            <div id="live-feed"><span class="label">Polymer DETECTED</span>⚠️ 2076: 95% fragmented into secondary microplastics. High leaching.</div>
-                <span class="label">SCANNING...</span> Waiting for detection event...
-            </div>
+        <div class="stat-grid">
+            <div class="stat-item">ITEMS LOGGED: 12</div>
+            <div class="stat-item">MICROPLASTIC DEBT: 4.2KG</div>
         </div>
 
-        <div class="calibration-data">
-            [SYS_INFO] CALIBRATION: Bakersfield-High-Noon-1.0 | VISION: YOLOv12+ViT
+        <div id="live-feed"><span class="label">Ferrous Metal DETECTED</span> ⛓️ 2076: 80% oxidized. Heavy rust flakes; structural loss.</div>
+
+        <div style="font-size: 0.7em; margin-top: 20px; opacity: 0.6;">
+            DOI: 10.AUDIT/BAKERSFIELD.2026.01.13 | CALIBRATION: HIGH-NOON
         </div>
     </div>
 </body>
