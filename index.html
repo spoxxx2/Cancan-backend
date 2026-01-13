@@ -2,24 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GodVision | Bakersfield Protocol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GodVision | Bakersfield Debris Audit</title>
     <style>
-        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; }
-        .box { border: 2px solid #00ff41; padding: 25px; box-shadow: 0 0 20px #00ff41; }
-        .label { background: #00ff41; color: #000; padding: 2px 8px; font-weight: bold; text-transform: uppercase; }
-        .data { color: #fff; margin: 15px 0; border-left: 3px solid #00ff41; padding-left: 10px; }
+        body { background: #0f0f0f; color: #00ff41; font-family: 'Courier New', monospace; margin: 20px; }
+        .container { border: 1px solid #00ff41; padding: 20px; box-shadow: 0 0 15px #00ff41; }
+        h1 { border-bottom: 2px solid #00ff41; padding-bottom: 10px; text-transform: uppercase; }
+        .status-box { background: #1a1a1a; padding: 15px; margin: 10px 0; border-left: 5px solid #ff4100; }
+        .forecast { color: #ffcc00; font-weight: bold; }
+        .calibration { color: #00bfff; font-size: 0.8em; }
+        .footer { margin-top: 20px; font-size: 0.7em; opacity: 0.6; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>📡 GODVISION // AUDIT LIVE</h2>
-        <div class="data">
-            <span class="label">Detection:</span> Ferrous Metal<br>
-            <span class="label">Status:</span> Corroded / Structural Loss<br>
-            <span class="label">Forecast:</span> 80% Oxidation by 2076
+    <div class="container">
+        <h1>📡 GodVision Live Audit</h1>
+        <p>Location: Kern River Basin | Status: <span style="color:red">SCANNING</span></p>
+        
+        <div class="status-box">
+            <h3>Latest Detection Event:</h3>
+            <div id="last-audit">Awaiting Master Strike sync...</div>
         </div>
-        <div style="font-size: 0.7em; opacity: 0.5; margin-top: 20px;">
-            DOI: 10.AUDIT/BAKERSFIELD.2026.01.13
+
+        <div class="calibration">
+            Spectral Calibration: Bakersfield-High-Noon-1.0<br>
+            Vision Mesh: YOLOv12 + ViT Hybrid
+        </div>
+
+        <div class="footer">
+            Digital Twin Log ID: $EVENT_ID | Hardwired Adaptive Strategy Active.
         </div>
     </div>
 </body>
