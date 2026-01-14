@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CanCan Pilot Program 2</title>
+    <title>CanCan Command - Pilot v2.0</title>
     <style>
         body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; display: flex; gap: 20px; }
         .panel { flex: 1; border: 2px solid #00ff41; padding: 20px; background: #000; box-shadow: 0 0 15px #00ff41; }
-        .funding { width: 350px; border-radius: 8px; overflow: hidden; }
-        .progress-container { margin: 20px 0; background: #111; border: 1px solid #00ff41; height: 30px; }
+        .funding { width: 350px; }
+        .map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; border: 1px solid #444; padding: 10px; }
+        .sector { border: 1px solid #00ff41; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.7em; }
+        .active-sector { background: rgba(0, 255, 65, 0.2); border: 2px solid #fff; }
+        .progress-bar { background: #111; border: 1px solid #00ff41; height: 30px; margin-bottom: 5px; }
         .progress-fill { background: #00ff41; height: 100%; width: 0%; transition: width 1s; }
-        .hash-tag { font-size: 0.7em; color: #008f11; word-break: break-all; }
-        .sector-tag { color: #ff00ff; font-weight: bold; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         button { background: #00ff41; color: #000; border: none; padding: 15px; font-weight: bold; width: 100%; cursor: pointer; }
+        #log { font-size: 0.75em; color: #008f11; height: 100px; overflow-y: auto; margin-top: 10px; border-top: 1px solid #333; }
     </style>
 </head>
 <body>
     <div class="panel">
-        <h2>[CAN-CAN] BAKERSFIELD FIELD OPS</h2>
-        <div class="progress-container"><div id="fill" class="progress-fill"></div></div>
-        <p>PILOT GOAL: <span id="val">$0.00</span> / $25,000.00</p>
+        <h2>[CAN-CAN] INTERCEPTION COMMAND</h2>
         
-        <hr color="#00ff41">
-        <input type="file" id="up" multiple>
-        <button onclick="scan()">START BATCH SCAN</button>
-
-        <div id="status" style="margin-top:10px;">> System Ready.</div>
-        
-        <div style="margin-top:20px; font-size:0.8em; border: 1px solid #444; padding: 10px;">
-            <strong>TOUR SUGGESTION:</strong> <span class="sector-tag">SECTOR A (Industrial)</span><br>
-            Target: Soiled Cellulose for Methane Credits.
+        <div class="stat-grid">
+            <div class="sector">TOTAL REVENUE<br><span id="val" style="font-size:1.5em;">$0.00</span></div>
+            <div class="sector">TARGET GOAL<br><span style="font-size:1.5em;">$25,000</span></div>
         </div>
+
+        <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
+
+        <div class="map-container">
+            <div class="sector active-sector" id="sec-a">SECTOR A (IND)<br>Methane Density: HIGH</div>
+            <div class="sector" id="sec-b">SECTOR B (AGRI)<br>Methane Density: MED</div>
+            <div class="sector" id="sec-c">SECTOR C (URB)<br>Methane Density: LOW</div>
+            <div class="sector" id="sec-d">SECTOR D (WST)<br>Pending Scan...</div>
+        </div>
+        
+        <input type="file" id="up" multiple style="margin-bottom:10px;">
+        <button onclick="scan()">EXECUTE BATCH INTERCEPTION</button>
+        <div id="log">> SYSTEM ARMED: Awaiting Bakersfield Sector A data...</div>
     </div>
 
     <div class="funding">
@@ -40,17 +48,25 @@
     let total = 0;
     async function scan() {
         const files = document.getElementById('up').files;
+        if(files.length === 0) return;
         const fd = new FormData();
         for(let f of files) { fd.append('files', f); }
         fd.append('humidity', '89');
 
-        const res = await fetch('http://localhost:8000/batch-scan', {method:'POST', body:fd});
-        const data = await res.json();
-        
-        total += parseFloat(data.total_credits.replace('$',''));
-        document.getElementById('val').innerText = `$${total.toFixed(2)}`;
-        document.getElementById('fill').style.width = (total/25000*100) + '%';
-        document.getElementById('status').innerHTML = `> HASH: <span class="hash-tag">${data.top_hash}</span><br>> STATUS: ${data.registry_status}`;
+        const log = document.getElementById('log');
+        log.innerHTML += `<br>> Scanning ${files.length} units...`;
+
+        try {
+            const res = await fetch('http://localhost:8000/batch-scan', {method:'POST', body:fd});
+            const data = await res.json();
+            
+            total += parseFloat(data.total_credits.replace('$',''));
+            document.getElementById('val').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('fill').style.width = (total/25000*100) + '%';
+            log.innerHTML += `<br>> SUCCESS: ${data.status} | HASH: ${data.ledger_entry.substring(0,16)}...`;
+        } catch (e) {
+            log.innerHTML += "<br>> ERROR: RESTART Termux main.py";
+        }
     }
     </script>
 </body>
