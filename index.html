@@ -1,120 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CANCAN | Golden Overlord AI</title>
+    <title>CanCan Admin - Multi-Scan v2026</title>
     <style>
-        :root {
-            --primary: #00ffaa; /* Neon Green Boost */
-            --overlord: #004d40; /* Deep Command Teal */
-            --accent: #ffcc00; /* Golden Donor Glow */
-            --bg: #0a0a0a; /* High-Tech Dark */
-            --text: #e0e0e0;
-        }
-        body { font-family: 'Courier New', monospace; margin: 0; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        
-        /* Nav */
-        nav { background: rgba(0,0,0,0.9); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary); sticky: top; }
-        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-        /* Impact Ledger Grid */
-        .ledger-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 40px 5%; }
-        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center; }
-        .stat-val { font-size: 2rem; color: var(--primary); display: block; }
-        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* AI Scanner Animation Overlay */
-        #scan-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,255,170,0.1); z-index: 9999; }
-        .scan-line { width: 100%; height: 4px; background: var(--primary); position: absolute; top: 0; animation: scan 2s infinite linear; box-shadow: 0 0 20px var(--primary); }
-        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
-
-        /* Donorbox Section */
-        .donate-zone { text-align: center; padding: 60px 5%; background: linear-gradient(to bottom, #0a0a0a, #111); }
-        .donorbox-btn { background: var(--accent); color: #000; padding: 20px 50px; border-radius: 5px; font-weight: 800; text-decoration: none; display: inline-block; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 0 30px rgba(255, 204, 0, 0.4); }
-        .donorbox-btn:hover { background: #fff; transform: scale(1.05); }
-
-        /* Footer */
-        footer { padding: 40px; text-align: center; border-top: 1px solid #333; font-size: 0.8rem; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; }
+        .panel { border: 1px solid #00ff41; padding: 20px; background: #111; box-shadow: 0 0 10px #00ff41; }
+        button { background: #00ff41; color: black; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
+        #log { margin-top: 20px; font-size: 0.9em; color: #008f11; }
     </style>
 </head>
 <body>
+    <div class="panel">
+        <h2>[SYSTEM] DIGITAL TWIN BATCH PROCESSOR</h2>
+        <p>LOCATION: Bakersfield, CA | CALIBRATION: 2026-01-14</p>
+        <hr color="#00ff41">
+        <input type="file" id="debris-upload" multiple accept="image/*">
+        <button onclick="startBatch()">INITIALize SCAN</button>
+        <div id="log"></div>
+    </div>
 
-<div id="scan-overlay"><div class="scan-line"></div></div>
+    <script>
+    async function startBatch() {
+        const files = document.getElementById('debris-upload').files;
+        const log = document.getElementById('log');
+        if (files.length === 0) return;
 
-<nav>
-    <div class="logo">CANCAN SYSTEM_v12.4</div>
-    <div style="font-size: 0.8rem;">EIN: 39-2261270 | 501(c)(3)</div>
-</nav>
+        const formData = new FormData();
+        for (let file of files) { formData.append('files', file); }
+        
+        // Hardwired Calibration Data
+        formData.append('humidity', '89');
+        formData.append('gain', '1.042');
 
-<div class="ledger-grid">
-    <div class="stat-card"><span class="stat-val" id="tons-count">1.84</span><span class="stat-label">Tons Recovered</span></div>
-    <div class="stat-card"><span class="stat-val" id="aid-count">$4,290</span><span class="stat-label">Town Aid Value</span></div>
-    <div class="stat-card"><span class="stat-val" id="confidence-count">99.8%</span><span class="stat-label">AI Confidence</span></div>
-</div>
+        log.innerHTML = "> Connecting to YOLOv12 + ViT Backend...<br>";
 
-<div style="text-align:center; padding: 50px;">
-    <h2>Digital Twin Ingestion Point</h2>
-    <input type="file" id="ai-upload" style="display:none">
-    <label for="ai-upload" style="cursor:pointer; padding: 20px; border: 2px dashed var(--primary); display: inline-block;">
-        [ CLICK TO SCAN DEBRIS ]
-    </label>
-</div>
-
-<div class="donate-zone">
-    <h3>Support the Overlord Strategy</h3>
-    <p>100% of trash-revaluation proceeds fund Town Aid.</p>
-    <br>
-    <a href="https://donorbox.org/your-campaign-id" class="donorbox-btn">ENHANCE AID NOW</a>
-</div>
-
-<footer>
-    UEI: SSWWJ3SEMZ73 | BAKERSFIELD NODE | TURNING TRASH TO TOWN AID
-</footer>
-
-<script>
-    // AI SCANNER TRIGGER
-    document.getElementById('ai-upload').onchange = function() {
-        const overlay = document.getElementById('scan-overlay');
-        overlay.style.display = 'block';
-        setTimeout(() => { 
-            overlay.style.display = 'none'; 
-            alert("AI SCAN COMPLETE: Material Categorized. Digital Twin Logged.");
-        }, 4000);
-    };
-
-    // COUNTER ANIMATION (BOOSTED)
-    function animateValue(id, start, end, duration) {
-        let obj = document.getElementById(id);
-        let range = end - start;
-        let minTimer = 50;
-        let stepTime = Math.abs(Math.floor(duration / range));
-        stepTime = Math.max(stepTime, minTimer);
-        let startTime = new Date().getTime();
-        let endTime = startTime + duration;
-        let timer;
-        function run() {
-            let now = new Date().getTime();
-            let remaining = Math.max((endTime - now) / duration, 0);
-            let value = Math.round(end - (remaining * range));
-            obj.innerHTML = (id === 'tons-count') ? (value/100).toFixed(2) : '$' + value.toLocaleString();
-            if (value == end) clearInterval(timer);
+        try {
+            const response = await fetch('http://localhost:8000/batch-scan', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            log.innerHTML += `> SUCCESS: ${data.batch_count} Twins Generated.<br>`;
+            log.innerHTML += `> TOTAL CARBON CREDITS: ${data.total_credits}<br>`;
+        } catch (e) {
+            log.innerHTML += "> ERROR: Backend Offline. Run 'python main.py' in Termux.<br>";
         }
-        timer = setInterval(run, stepTime);
     }
-    animateValue("tons-count", 0, 184, 2000);
-    animateValue("aid-count", 0, 4290, 2000);
-</script>
-
+    </script>
 </body>
 </html>
-<script>
-    const mapNode = L.map('map').setView([35.3733, -119.0187], 13);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CANCAN Strategy'
-    }).addTo(mapNode);
-    L.heatLayer([[35.3733, -119.0187, 0.8], [35.3850, -119.0120, 1.0]], {radius: 25, blur: 15}).addTo(mapNode);
-</script>
