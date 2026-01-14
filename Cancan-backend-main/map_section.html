@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+
+<div id="map" style="height: 500px; width: 90%; margin: 40px auto; border: 2px solid var(--primary); border-radius: 20px; box-shadow: 0 0 20px rgba(0,255,170,0.2);"></div>
+
+<script>
+    // 1. Initialize the Bakersfield Node Map
+    const map = L.map('map').setView([35.3733, -119.0187], 13);
+    
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CARTO'
+    }).addTo(map);
+
+    // 2. Mock Data for "Golden Overlord" Visual (Replace with Supabase fetch)
+    const heatData = [
+        [35.3733, -119.0187, 0.8], // Central Node
+        [35.3850, -119.0120, 1.0], // Hazard Cluster
+        [35.3600, -119.0300, 0.5]  // Textile Recovery
+    ];
+
+    // 3. Render the Heat Layer
+    const heat = L.heatLayer(heatData, {
+        radius: 25,
+        blur: 15,
+        maxZoom: 17,
+        gradient: {0.4: 'blue', 0.65: 'lime', 1: 'yellow'}
+    }).addTo(map);
+
+    console.log("MAP_NODE: Active and Synchronized with Bakersfield GPS.");
+</script>

@@ -1,0 +1,60 @@
+<style>
+    .founder-card {
+        background: var(--dark);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin: 40px auto;
+        max-width: 700px;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+        border-left: 5px solid var(--accent);
+    }
+    .founder-card::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        right: 20px;
+        font-size: 150px;
+        color: rgba(255,255,255,0.05);
+        font-family: serif;
+    }
+    .pulse-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #2ecc71;
+        border-radius: 50%;
+        margin-right: 10px;
+        animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .founder-meta { font-family: monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 15px; }
+    .signature { margin-top: 20px; font-style: italic; color: var(--accent); }
+</style>
+
+<div class="founder-card" id="founder-message">
+    <div class="founder-meta">
+        <span class="pulse-indicator"></span> 
+        LOG_DATE: <span id="current-date"></span> | STATUS: ACTIVE_STRATEGY
+    </div>
+    <div id="message-body">
+        "Every piece of plastic we pull from the mud isn't just waste; it's a micro-investment in the town's future. By hardwiring AI into our disposal logic, we turn the 'unwanted' into the 'foundational.' Let's keep building."
+    </div>
+    <div class="signature">— Founder, CANCAN Adaptive Master Strategy</div>
+</div>
+
+<script>
+    document.getElementById('current-date').innerText = new Date().toLocaleDateString();
+    
+    // Logic to simulate a new "daily" message from a hardwired list
+    const messages = [
+        "Trash is just misplaced capital. Today, we recalibrate the value of our town's resources.",
+        "The Digital Twin log is growing. Each upload is a vote for a cleaner, more resilient economy.",
+        "501(c)(3) isn't just a tax status; it's a promise of transparency and community aid.",
+        "YOLOv12 is live. Our eyes are open. Our mission is clear: Turn the debris of yesterday into the aid of tomorrow."
+    ];
+    const dailyMessage = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById('message-body').innerText = `"${dailyMessage}"`;
+</script>
