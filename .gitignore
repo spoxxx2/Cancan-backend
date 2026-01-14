@@ -1,28 +1,4 @@
-# System & Shell Noise
-.bash_history
-.bash_profile
-.bashrc*
-.lesshst
-.psql_history
-.python_history
-.ssh/
-.termux/
-.cache/
-.config/
-.local/
-.shortcuts/
-
-# Heavy Environments & Dependencies
-node_modules/
-venv/
 __pycache__/
-*.zip
-*.tar.gz
-*.tgz
-
-# Temporary & Log Files
-nohup.out
-sentinel.log
-core.log
-*.bak
-tmp/
+*.pyc
+.env
+storage/

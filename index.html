@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CanCan Admin - Multi-Scan v2026</title>
+    <title>CanCan Admin - Pilot v2.0</title>
     <style>
-        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; }
-        .panel { border: 1px solid #00ff41; padding: 20px; background: #111; box-shadow: 0 0 10px #00ff41; }
-        button { background: #00ff41; color: black; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
-        #log { margin-top: 20px; font-size: 0.9em; color: #008f11; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; display: flex; gap: 20px; }
+        .control-panel { flex: 1; border: 1px solid #00ff41; padding: 20px; background: #111; box-shadow: 0 0 10px #00ff41; }
+        .funding-panel { width: 350px; border: 1px solid #00ff41; padding: 10px; background: #fff; border-radius: 8px; }
+        .goal-box { margin-bottom: 20px; padding: 10px; border: 1px dashed #00ff41; background: #000; }
+        .progress-bar { background: #222; border: 1px solid #00ff41; height: 25px; width: 100%; position: relative; }
+        .progress-fill { background: #00ff41; height: 100%; width: 0%; transition: width 0.8s; }
+        .tour-suggestions { margin-top: 20px; padding: 10px; background: #1a1a1a; border: 1px solid #444; font-size: 0.85em; }
+        button { background: #00ff41; color: black; border: none; padding: 12px; cursor: pointer; font-weight: bold; width: 100%; }
+        #log { margin-top: 15px; font-size: 0.8em; color: #008f11; height: 120px; overflow-y: auto; border-top: 1px solid #333; }
+        .stat { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="panel">
-        <h2>[SYSTEM] DIGITAL TWIN BATCH PROCESSOR</h2>
-        <p>LOCATION: Bakersfield, CA | CALIBRATION: 2026-01-14</p>
-        <hr color="#00ff41">
-        <input type="file" id="debris-upload" multiple accept="image/*">
-        <button onclick="startBatch()">INITIALize SCAN</button>
-        <div id="log"></div>
+    <div class="control-panel">
+        <h2>[SYSTEM] PILOT PROGRAM 2 COMMAND</h2>
+        
+        <div class="goal-box">
+            <div>PILOT GOAL: <span id="credit-total" class="stat">$0.00</span> / <span class="stat">$25,000.00</span></div>
+            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+            <div style="font-size: 0.7em; margin-top:5px;">METHANE CREDIT RATIO: $21.00/tCO2e</div>
+        </div>
+
+        <input type="file" id="debris-upload" multiple accept="image/*" style="margin-bottom:10px;">
+        <button onclick="startBatch()">INITIALIZE BATCH SCAN & SYNC</button>
+        
+        <div id="log">> Awaiting Bakersfield Debris Data...</div>
+
+        <div class="tour-suggestions">
+            <strong>📍 SUGGESTED SCAN TOURS (BAKERSFIELD):</strong><br>
+            - Sector A: Industrial Waste Corridors (High Ferrous Metal/Methane potential)<br>
+            - Sector B: Agricultural Runoff Zones (High Cellulose/Compost potential)<br>
+            - Sector C: Retail/Urban Piles (High Polymer/PET potential)
+        </div>
+    </div>
+
+    <div class="funding-panel">
+        <script type="module" src="https://donorbox.org/widgets.js" async></script>
+        <dbox-widget campaign="cancan-pilot-program-2" type="donation_form" enable-auto-scroll="true"></dbox-widget>
     </div>
 
     <script>
+    let cumulativeCredits = 0;
+    const goal = 25000;
+
     async function startBatch() {
         const files = document.getElementById('debris-upload').files;
         const log = document.getElementById('log');
@@ -27,23 +54,21 @@
 
         const formData = new FormData();
         for (let file of files) { formData.append('files', file); }
-        
-        // Hardwired Calibration Data
-        formData.append('humidity', '89');
-        formData.append('gain', '1.042');
-
-        log.innerHTML = "> Connecting to YOLOv12 + ViT Backend...<br>";
 
         try {
-            const response = await fetch('http://localhost:8000/batch-scan', {
-                method: 'POST',
-                body: formData
-            });
+            const response = await fetch('http://localhost:8000/batch-scan', { method: 'POST', body: formData });
             const data = await response.json();
-            log.innerHTML += `> SUCCESS: ${data.batch_count} Twins Generated.<br>`;
-            log.innerHTML += `> TOTAL CARBON CREDITS: ${data.total_credits}<br>`;
+            
+            const batchValue = parseFloat(data.total_credits.replace('$', ''));
+            cumulativeCredits += batchValue;
+            
+            document.getElementById('credit-total').innerText = `$${cumulativeCredits.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            const percent = Math.min((cumulativeCredits / goal) * 100, 100);
+            document.getElementById('progress-fill').style.width = percent + '%';
+            
+            log.innerHTML += `<br>> BATCH SYNC: +$${batchValue.toFixed(2)} Carbon Value added to $25k Goal.`;
         } catch (e) {
-            log.innerHTML += "> ERROR: Backend Offline. Run 'python main.py' in Termux.<br>";
+            log.innerHTML += "<br>> ERROR: Backend Offline.";
         }
     }
     </script>
