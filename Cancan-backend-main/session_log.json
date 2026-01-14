@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "title": "Cancan Backend-Supabase Hardwire Session",
+    "upload_type": "software",
+    "description": "Full integration of Supabase logs with Google Sheets API via Node.js.",
+    "creators": [{"name": "Arvin Team", "affiliation": "Cancan"}]
+  }
+}
