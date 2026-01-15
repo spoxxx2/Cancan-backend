@@ -1,73 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CanCan Command - Pilot v2.0</title>
+    <title>CanCan Overlord Dashboard</title>
     <style>
-        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; padding: 20px; display: flex; gap: 20px; }
-        .panel { flex: 1; border: 2px solid #00ff41; padding: 20px; background: #000; box-shadow: 0 0 15px #00ff41; }
-        .funding { width: 350px; }
-        .map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; border: 1px solid #444; padding: 10px; }
-        .sector { border: 1px solid #00ff41; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.7em; }
-        .active-sector { background: rgba(0, 255, 65, 0.2); border: 2px solid #fff; }
-        .progress-bar { background: #111; border: 1px solid #00ff41; height: 30px; margin-bottom: 5px; }
-        .progress-fill { background: #00ff41; height: 100%; width: 0%; transition: width 1s; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        button { background: #00ff41; color: #000; border: none; padding: 15px; font-weight: bold; width: 100%; cursor: pointer; }
-        #log { font-size: 0.75em; color: #008f11; height: 100px; overflow-y: auto; margin-top: 10px; border-top: 1px solid #333; }
+        body { font-family: 'Courier New', monospace; background: #0d1117; color: #00ff41; padding: 20px; }
+        .ticker { background: #161b22; border: 1px solid #00ff41; padding: 15px; margin-bottom: 20px; }
+        .nonprofit-seal { color: #58a6ff; font-weight: bold; border: 2px solid #58a6ff; display: inline-block; padding: 5px 10px; margin-bottom: 10px; }
+        h1, h2 { border-bottom: 1px solid #30363d; padding-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="panel">
-        <h2>[CAN-CAN] INTERCEPTION COMMAND</h2>
-        
-        <div class="stat-grid">
-            <div class="sector">TOTAL REVENUE<br><span id="val" style="font-size:1.5em;">$0.00</span></div>
-            <div class="sector">TARGET GOAL<br><span style="font-size:1.5em;">$25,000</span></div>
-        </div>
-
-        <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
-
-        <div class="map-container">
-            <div class="sector active-sector" id="sec-a">SECTOR A (IND)<br>Methane Density: HIGH</div>
-            <div class="sector" id="sec-b">SECTOR B (AGRI)<br>Methane Density: MED</div>
-            <div class="sector" id="sec-c">SECTOR C (URB)<br>Methane Density: LOW</div>
-            <div class="sector" id="sec-d">SECTOR D (WST)<br>Pending Scan...</div>
-        </div>
-        
-        <input type="file" id="up" multiple style="margin-bottom:10px;">
-        <button onclick="scan()">EXECUTE BATCH INTERCEPTION</button>
-        <div id="log">> SYSTEM ARMED: Awaiting Bakersfield Sector A data...</div>
+    <div class="nonprofit-seal">OFFICIAL 501(c)(3) NON-PROFIT ENTITY</div>
+    <h1>CANCAN: THE OVERLORD PROTOCOL</h1>
+    
+    <div class="ticker">
+        <h2>COMMUNITY REINVESTMENT TRACKER</h2>
+        <p>Current Methane Credits Minted: <strong>$35.70</strong></p>
+        <p>Total Community Dividend: <strong>$35.70</strong> (100% Reinvested)</p>
+        <p>Next Milestone: <strong>$25,000.00</strong></p>
     </div>
 
-    <div class="funding">
-        <script type="module" src="https://donorbox.org/widgets.js" async></script>
-        <dbox-widget campaign="cancan-pilot-program-2" type="donation_form"></dbox-widget>
-    </div>
+    <h2>LIVE B2B COMPLIANCE FEED</h2>
+    <ul>
+        <li>[SECTOR A] INTERCEPTION: VALLARTA-BRANDED ORGANICS - PENDING AUDIT</li>
+        <li>[SECTOR A] INTERCEPTION: SMART & FINAL CELLULOSE - VERIFIED</li>
+    </ul>
 
-    <script>
-    let total = 0;
-    async function scan() {
-        const files = document.getElementById('up').files;
-        if(files.length === 0) return;
-        const fd = new FormData();
-        for(let f of files) { fd.append('files', f); }
-        fd.append('humidity', '89');
-
-        const log = document.getElementById('log');
-        log.innerHTML += `<br>> Scanning ${files.length} units...`;
-
-        try {
-            const res = await fetch('http://localhost:8000/batch-scan', {method:'POST', body:fd});
-            const data = await res.json();
-            
-            total += parseFloat(data.total_credits.replace('$',''));
-            document.getElementById('val').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('fill').style.width = (total/25000*100) + '%';
-            log.innerHTML += `<br>> SUCCESS: ${data.status} | HASH: ${data.ledger_entry.substring(0,16)}...`;
-        } catch (e) {
-            log.innerHTML += "<br>> ERROR: RESTART Termux main.py";
-        }
-    }
-    </script>
+    <hr>
+    <p><small>DOI: 10.5555/cancan.2026.overlord.01 | Strategy: Community Circularity</small></p>
 </body>
 </html>
