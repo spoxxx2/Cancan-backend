@@ -17,7 +17,7 @@ class Certificate(FPDF):
         self.ln(10)
 
 @app.post("/batch-scan")
-async def batch_scan(files: List[UploadFile] = File(...), humidity: str = Form(...)):
+async def batch_scan(files: List[UploadFile] = File(...), humidity: str = Form(...), food_lbs: float = Form(0.0)):
     total_credits = 0.0
     batch_id = hashlib.md5(str(time.time()).encode()).hexdigest()[:8]
     
@@ -26,15 +26,22 @@ async def batch_scan(files: List[UploadFile] = File(...), humidity: str = Form(.
     pdf.set_font("Courier", size=10)
     pdf.cell(200, 10, text=f"REPORT ID: {batch_id}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.cell(200, 10, text=f"LOCATION: Bakersfield Sector A (Industrial)", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    pdf.cell(200, 10, text=f"DATE: 2026-01-14", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     
+    # SB 1383 Organic Math ($0.15 per lb diverted)
+    organic_val = food_lbs * 0.15
+    total_credits += organic_val
+
+    pdf.cell(200, 10, text=f"SB 1383 COMPLIANCE: {food_lbs} lbs Recovered", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.cell(200, 10, text=f"ORGANIC CREDIT VALUE: ${organic_val:.2f}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.ln(5)
+
     batch_data = []
     for file in files:
-        credit_val = 17.85
-        total_credits += credit_val
+        unit_val = 17.85
+        total_credits += unit_val
         file_hash = hashlib.sha256(file.filename.encode()).hexdigest()[:16]
-        pdf.cell(200, 8, text=f"- UNIT: {file.filename} | VALUE: ${credit_val} | HASH: {file_hash}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-        batch_data.append({"file": file.filename, "hash": file_hash, "value": credit_val})
+        pdf.cell(200, 8, text=f"- UNIT: {file.filename} | VALUE: ${unit_val} | HASH: {file_hash}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        batch_data.append({"file": file.filename, "hash": file_hash, "value": unit_val})
 
     pdf.ln(10)
     pdf.set_font("Courier", 'B', 12)
@@ -43,9 +50,8 @@ async def batch_scan(files: List[UploadFile] = File(...), humidity: str = Form(.
     pdf_filename = f"cert_{batch_id}.pdf"
     pdf.output(pdf_filename)
 
-    # FORCE WRITE TO LEDGER
     with open("digital_twin_ledger.json", "a") as f:
-        json.dump({"batch_id": batch_id, "total": total_credits, "timestamp": time.time(), "data": batch_data}, f)
+        json.dump({"batch_id": batch_id, "food_lbs": food_lbs, "total": total_credits, "timestamp": time.time()}, f)
         f.write("\n")
 
     return {"status": "SUCCESS", "total": f"${total_credits:.2f}", "cert": pdf_filename}
