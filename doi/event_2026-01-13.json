@@ -1,0 +1,27 @@
+{
+  "detection_event": "2026-01-13_BFLD_AIRPORT_01",
+  "spectral_calibration": {
+    "sensor_id": "KERN-VIS-09",
+    "gain": 1.45,
+    "offset": 0.02,
+    "wavelength_range": "350-2500nm"
+  },
+  "objects": [
+    {
+      "label": "Corrugated Cardboard",
+      "material": "Cellulose",
+      "sub_type": "OCC",
+      "condition": "Wet",
+      "confidence": 0.98,
+      "estimated_value": 0.12,
+      "contamination_risk": "High",
+      "suggested_bin": "Compost",
+      "forecast_50yr": {
+        "appearance": "Soil-integrated organic matter",
+        "worth": 0.00,
+        "danger_level": "Low (Biodegraded)",
+        "environmental_impact_score": 88
+      }
+    }
+  ]
+}

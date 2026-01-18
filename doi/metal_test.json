@@ -1,0 +1,26 @@
+{
+  "detection_event": "2026-01-13_BFLD_METAL_SCAN",
+  "spectral_calibration": {
+    "sensor_id": "KERN-VIS-09",
+    "gain": 1.45,
+    "wavelength_range": "350-2500nm"
+  },
+  "objects": [
+    {
+      "label": "Scrap Steel",
+      "material": "Ferrous Metal",
+      "sub_type": "Iron/Steel",
+      "condition": "Corroded",
+      "confidence": 0.99,
+      "estimated_value": 4.50,
+      "contamination_risk": "Medium",
+      "suggested_bin": "Circular Economy",
+      "forecast_50yr": {
+        "appearance": "Partially oxidized structural remains",
+        "worth": 12.50,
+        "danger_level": "High (Heavy Metal Leaching)",
+        "environmental_impact_score": 95
+      }
+    }
+  ]
+}

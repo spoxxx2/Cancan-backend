@@ -1,5 +1,51 @@
-<html><body><ul>
-<li><a href="index.html">index.html</a></li>
-<li><a href="2026-01-02.html">2026-01-02.html</a></li>
-<li><a href="2026-01-01.html">2026-01-01.html</a></li>
-</ul></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CANCANKERN DOI - LIVE HUB</title>
+    <style>
+        body { background: #000; color: #ffd700; font-family: 'Courier New', monospace; padding: 0; margin: 0; }
+        .live-banner { background: #ffd700; color: #000; padding: 10px; display: flex; justify-content: space-around; font-weight: bold; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 15px rgba(255,214,0,0.4); }
+        .container { padding: 20px; }
+        .upload-sect { border: 2px dashed #ffd700; padding: 20px; margin: 20px 0; background: #111; }
+        button { background: #ffd700; color: #000; border: none; padding: 15px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1em; }
+        a { color: #00ff41; text-decoration: none; display: block; margin: 10px 0; border-left: 3px solid #00ff41; padding-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="live-banner">
+        <span>🌊 PROTECTION: <span id="score">8</span>%</span>
+        <span>🌿 CO2: <span id="co2">2.25</span>kg</span>
+        <span>🛰️ TWINS: <span id="twins">3</span></span>
+    </div>
+
+    <div class="container">
+        <h1>🛰️ MASTER STRATEGY INTERFACE</h1>
+        <p>LOCATION: BAKERSFIELD-AIRPORT-SITE | STATUS: ENHANCED</p>
+
+        <div class="upload-sect">
+            <h3>📤 SYNC VISION EVENT</h3>
+            <input type="file" id="fileInput" style="margin-bottom:10px;">
+            <button onclick="uploadFile()">BOOST TO REPOSITORY</button>
+        </div>
+
+        <div id="logs">
+            <h3>📂 DIGITAL TWIN REPOSITORY</h3>
+            <a href="2026-01-13.html">> 2026-01-13 ANALYSIS LOG (OVERLORD V2.1)</a>
+        </div>
+    </div>
+
+    <script>
+        async function uploadFile() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return alert('Select file first');
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                await fetch('/', { method: 'POST', body: e.target.result });
+                alert('Success: Digital Twin Hardwired.');
+                location.reload();
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+</body>
+</html>
