@@ -1,0 +1,12 @@
+{
+    "id": "TWIN_2026-01-18_20-27-57_20251225_133006",
+    "compliance": "BMC \u00a7 8.32.190",
+    "material": "Polymer / Mixed Organic",
+    "timeline": {
+        "10y": "Fragmentation Start",
+        "25y": "Leachate Phase",
+        "50y": "Micro-plastic 2076"
+    },
+    "environmental_impact_score": 8.5,
+    "status": "Verified"
+}
