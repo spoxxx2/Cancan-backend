@@ -1,118 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CANCAN KERN | AI-Powered Food Recovery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>CANCAN KERN - Compliance & Food Recovery</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        html { scroll-behavior: smooth; }
-        .glass { background: rgba(10, 15, 30, 0.95); backdrop-filter: blur(20px); }
-        .emerald-glow { box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.3); }
-        .terminal-shadow { box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
-        @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .status-pulse { animation: pulse-slow 2s infinite; }
+        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #f4f4f4; }
+        header { background: #2e7d32; color: white; padding: 1rem; text-align: center; }
+        section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        #map { height: 400px; width: 100%; border-radius: 8px; }
+        .stats { display: flex; justify-content: space-around; font-weight: bold; color: #2e7d32; }
     </style>
 </head>
-<body class="bg-[#050810] text-slate-400 font-sans selection:bg-emerald-500/30">
+<body>
 
-    <nav class="fixed w-full z-50 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/40">
-                    <i class="fas fa-biohazard text-[#050810]"></i>
-                </div>
-                <span class="text-2xl font-black tracking-tighter text-white">CANCAN <span class="text-emerald-500">KERN</span></span>
-            </div>
-            <div class="hidden lg:flex space-x-10 text-[10px] uppercase font-bold tracking-[0.3em]">
-                <a href="#vision" class="hover:text-emerald-400 transition">Vision</a>
-                <a href="#compliance" class="hover:text-emerald-400 transition">Compliance</a>
-                <a href="#ledger" class="hover:text-emerald-400 transition">Ledger</a>
-                <a href="#vault" class="hover:text-emerald-400 transition">Vault</a>
-            </div>
-            <a href="#donate" class="bg-emerald-500 text-[#050810] px-6 py-2 rounded-full text-xs font-black uppercase hover:scale-105 transition">Support Node</a>
-        </div>
-    </nav>
+<header>
+    <h1>CANCAN KERN</h1>
+    <p>Authorized Third-Party Compliance Auditor | City of Bakersfield</p>
+</header>
 
-    <header class="pt-40 pb-20 px-6 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-bold mb-6">
-                    <span class="status-pulse w-2 h-2 bg-emerald-500 rounded-full"></span>
-                    <span>BAKERSFIELD NODE ACTIVE</span>
-                </div>
-                <h1 class="text-7xl md:text-8xl font-black text-white leading-none mb-8">WASTE<br><span class="text-emerald-500 italic">ORCHESTRATED.</span></h1>
-                <p class="text-lg text-slate-500 max-w-lg mb-10 leading-relaxed">
-                    Deploying <strong>Hybrid YOLOv12 + Vision Transformers</strong> to automate food recovery and methane avoidance in Kern County. 
-                </p>
-                <div class="flex space-x-4">
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-3xl flex-1">
-                        <p class="text-[10px] uppercase font-bold tracking-widest mb-1 text-slate-500">Methane Avoided</p>
-                        <p class="text-3xl font-black text-white">1,028<span class="text-emerald-500 text-sm ml-1">kg CO2e</span></p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-[#0c111d] border border-white/10 rounded-3xl p-6 font-mono text-xs terminal-shadow">
-                <div class="flex space-x-2 mb-4">
-                    <div class="w-3 h-3 bg-red-500/50 rounded-full"></div>
-                    <div class="w-3 h-3 bg-yellow-500/50 rounded-full"></div>
-                    <div class="w-3 h-3 bg-green-500/50 rounded-full"></div>
-                </div>
-                <div class="space-y-2">
-                    <p class="text-emerald-500">>>> INITIALIZING HYBRID_VISION_AUDIT...</p>
-                    <p class="text-slate-500">Searching for Organic Debris in Bakersfield District 1...</p>
-                    <p class="text-white font-bold">[DETECTED] Material: Cellulose | Confidence: 94.8%</p>
-                    <p class="text-blue-400">Status: BMC § 8.32.190 COMPLIANT</p>
-                    <p class="text-slate-600 animate-pulse">_</p>
-                </div>
-            </div>
-        </div>
-    </header>
+<section id="status" class="stats">
+    <div>EIN: 39-2261270</div>
+    <div>Status: 501(c)(3) Active</div>
+    <div>Address: 1501 Pearl St, 93305</div>
+</section>
 
-    <section id="ledger" class="py-32 bg-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-black text-white mb-16 text-center">AI VISION LEDGER</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-950 border border-white/5 rounded-[2.5rem] p-8 hover:border-emerald-500/50 transition-all emerald-glow">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="bg-emerald-500/10 text-emerald-500 p-3 rounded-2xl">
-                            <i class="fas fa-barcode"></i>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-600">ID: KERN-AUD-306 <span class='text-[10px] block text-emerald-400'>+205kg BSF Yield</span></span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Organic Diverted</h3>
-                    <p class="text-xs mb-6 leading-relaxed">Debris categorized as Cellulose/Compostable under Hyperspectral Fingerprinting.</p>
-                    <div class="space-y-3 pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-[10px] uppercase font-bold tracking-widest">
-                            <span>Spectral ID:</span> <span class="text-emerald-400">Verified Organic</span>
-                        </div>
-                        <div class="flex justify-between text-[10px] uppercase font-bold tracking-widest">
-                            <span>Impact Score:</span> <span class="text-blue-400">8.9/10</span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </section>
+<section id="about">
+    <h2>About & Support</h2>
+    <p>CANCAN is a Registered Food Recovery Organization (FRO) dedicated to diverting organic waste and enforcing plastic truth-in-labeling standards.</p>
+    <button onclick="alert('Donation Link Coming Soon')">Support Our Mission</button>
+</section>
 
-    <footer class="py-20 text-center border-t border-white/5">
-        <p class="text-[10px] font-bold tracking-[1em] uppercase text-slate-700">Hardwired in Bakersfield • 2026</p>
-    </footer>
+<section id="map-gallery">
+    <h2>Audit Map Gallery</h2>
+    <div id="map"></div>
+</section>
+
+<section id="compliance">
+    <h2>Legal Compliance & Auditing</h2>
+    <ul>
+        <li><strong>BMC § 8.32.190:</strong> Authority for bin auditing and enforcement.</li>
+        <li><strong>SB 1383:</strong> Organic waste diversion and food recovery mandates.</li>
+        <li><strong>SB 343:</strong> Verification of plastic recyclability ("Truth in Labeling").</li>
+        <li><strong>SB 54:</strong> Producer responsibility and packaging reduction.</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Email: recyclinginfo@bakersfieldcity.us (Reporting)</p>
+    <p>Location: 1501 Pearl St, Bakersfield, CA</p>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([35.3733, -119.0187], 13); // Centered on Bakersfield
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.marker([35.3733, -119.0187]).addTo(map).bindPopup('CANCAN HQ: 1501 Pearl St').openPopup();
+</script>
 
 </body>
 </html>
-
-Mon Jan 19 14:56:17 PST 2026
-Mon Jan 19 14:56:42 PST 2026
-<section id="compliance">
-    <h2>Compliance & Transparency</h2>
-    <p>Status: 501(c)(3) Non-Profit Organization</p>
-    <p>EIN: 39-2261270</p>
-    <p>Governed by California SB 1262 (Nonprofit Integrity Act)</p>
-</section>
-
-<footer>
-    <p>© 2026 CANCAN KERN - Third-Party Compliance Auditor. EIN: 39-2261270</p>
-</footer>
