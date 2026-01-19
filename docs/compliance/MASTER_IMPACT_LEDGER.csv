@@ -1,5 +1,5 @@
-Audit_ID,Timestamp,Material_Type,Condition,CO2e_Offset_kg,Thermal_Signature,ViT_Confidence,Disposal_Path
-mock_audit_log.json,2026-01-18 20:00:00,Cellulose / Mixed Fiber,Soiled (Wet),8.5,24.2°C,96.4%,Circular Economy / Compost
-TWIN_2026-01-18_20-27-57_20251225_133006,2026-01-18 20:00:00,Cellulose / Mixed Fiber,Soiled (Wet),8.5,24.2°C,96.4%,Circular Economy / Compost
-TWIN_2026-01-18_20-27-33_CANCAN_1767749530,2026-01-18 20:00:00,Cellulose / Mixed Fiber,Soiled (Wet),8.5,24.2°C,96.4%,Circular Economy / Compost
-TWIN_2026-01-18_20-27-34_CANCAN_1767751013,2026-01-18 20:00:00,Cellulose / Mixed Fiber,Soiled (Wet),8.5,24.2°C,96.4%,Circular Economy / Compost
+Audit_ID,Timestamp,Material,CO2e_kg,Market_Value_USD,BSF_Larvae_Yield_kg,Frass_Yield_kg
+mock_audit_log.json,2026-01-18 20:00:00,Cellulose / Mixed Fiber,8.5,$0.2423,1.7,4.25
+TWIN_2026-01-18_20-27-57_20251225_133006,2026-01-18 20:00:00,Cellulose / Mixed Fiber,8.5,$0.2423,1.7,4.25
+TWIN_2026-01-18_20-27-33_CANCAN_1767749530,2026-01-18 20:00:00,Cellulose / Mixed Fiber,8.5,$0.2423,1.7,4.25
+TWIN_2026-01-18_20-27-34_CANCAN_1767751013,2026-01-18 20:00:00,Cellulose / Mixed Fiber,8.5,$0.2423,1.7,4.25
