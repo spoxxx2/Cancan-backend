@@ -1,0 +1,25 @@
+TO: Gregg Strakaluse, Director of Public Works
+FROM: CANCAN KERN (EIN: 39-2261270)
+SUBJECT: Pilot Program: 3 High-Accuracy SB 1383 Mystery Audits
+
+Dear Mr. Strakaluse,
+
+CANCAN KERN is offering the City of Bakersfield a 3-audit trial of our 
+Vision AI Compliance System at zero cost. 
+
+As a local Food Recovery Organization (FRO), we have developed a 
+'Digital Twin' auditing process using Hybrid YOLOv12 + ViT models. 
+This system identifies organic contamination in commercial bins with 
+higher accuracy and lower safety risk than manual inspections.
+
+The 3-Audit Trial will provide:
+1. Detailed JSON metadata of contamination events.
+2. Photographic evidence for Tier 1 & Tier 2 generator reporting.
+3. A summary of diverted CO2e impact.
+
+We want to prove that CANCAN KERN can help the City satisfy CalRecycle 
+Article 13 requirements more efficiently. Our status and credentials 
+are live at https://cancankern.org/id.
+
+Sincerely,
+CANCAN KERN

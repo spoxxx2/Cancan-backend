@@ -1,0 +1,8 @@
+{
+  "node_id": "PEARL-ST-NODE-01",
+  "tcc_zone": "Southeast_Strong_OTK",
+  "utility_status": "OFF-GRID_SOLAR_SYNCED",
+  "methane_avoided_mt": 0.86,
+  "verification_method": "Bioacoustic_Digital_Twin",
+  "infrastructure_value": "Decentralized_Climate_Resiliency"
+}
