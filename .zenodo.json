@@ -1,21 +1,11 @@
 {
-  "title": "CANCAN KERN: Bio-Acoustic Monitoring & Isotopic Debris Forensic Vault",
-  "description": "Proprietary SGO v1.3 architecture for real-time Bio-Acoustic monitoring of BSFL (Black Soldier Fly Larvae) and 100-year forensic forecasting of debris piles. Includes BALRL™ (Bio-Acoustic Layered Response Logic) and Isotopic Fingerprinting metadata.",
   "creators": [
     {
-      "name": "CANCAN KERN Systems",
-      "affiliation": "SGO-BOOST Pilot"
+      "name": "CANCANKERN (501c3)",
+      "affiliation": "Bakersfield, CA"
     }
   ],
-  "access_right": "open",
-  "license": "CC-BY-NC-ND-4.0",
-  "keywords": [
-    "Bio-Acoustic Monitoring",
-    "BSFL",
-    "Digital Twin",
-    "Forensic Debris Tracking",
-    "SGO-BOOST",
-    "BALRL"
-  ],
-  "notes": "Copyright 2026 CANCAN KERN. All Rights Reserved. Bio-Acoustic Monitoring of BSFL pilot is protected under SGO Adaptive Master Strategy. BALRL™ is a pending trademark."
+  "title": "Zenith Node 001: 318-Item Predictive Debris Matrix",
+  "description": "Multimodal dataset for SB 1383 compliance including 100-year oxidation forecasts.",
+  "keywords": ["SB 1383", "Circular Economy", "AI Training Data"]
 }
