@@ -1,0 +1,28 @@
+{
+  "detection_event": "DE-1769215904",
+  "metadata": {
+    "material": "Ferrous Metal",
+    "sub_type": "Steel Rebar / Structural",
+    "condition": "Soiled / Surface Oxidation",
+    "disposal": "Circular Economy (Scrap Secondary Smelting)",
+    "vision_model": "Hybrid YOLOv12 + Vision Transformer (ViT)",
+    "fingerprint": "Hyperspectral-FE-77",
+    "coordinates": "35.3733° N, 119.0187° W",
+    "contamination_risk": "Low (Non-leaching)",
+    "environmental_impact_score": 8.4
+  },
+  "forecast_log": {
+    "10_year": {"oxidation": "15%", "worth": "/data/data/com.termux/files/usr/bin/bash.85/kg", "danger": "Minimal", "appearance": "Rust patina forming, structural integrity 98%"},
+    "20_year": {"oxidation": "30%", "worth": "/data/data/com.termux/files/usr/bin/bash.70/kg", "danger": "Low", "appearance": "Pitting initiated, scaling visible"},
+    "30_year": {"oxidation": "45%", "worth": "/data/data/com.termux/files/usr/bin/bash.55/kg", "danger": "Moderate", "appearance": "Significant flaking, localized thinning"},
+    "40_year": {"oxidation": "60%", "worth": "/data/data/com.termux/files/usr/bin/bash.40/kg", "danger": "Moderate", "appearance": "Loss of structural cross-section"},
+    "50_year": {"oxidation": "75%", "worth": "/data/data/com.termux/files/usr/bin/bash.25/kg", "danger": "High", "appearance": "Fragmenting, heavy soil integration"},
+    "60_year": {"oxidation": "82%", "worth": "/data/data/com.termux/files/usr/bin/bash.15/kg", "danger": "High", "appearance": "Structural collapse, mineralizing"},
+    "70_year": {"oxidation": "88%", "worth": "/data/data/com.termux/files/usr/bin/bash.10/kg", "danger": "Moderate", "appearance": "Deep soil encasement"},
+    "80_year": {"oxidation": "93%", "worth": "/data/data/com.termux/files/usr/bin/bash.05/kg", "danger": "Low", "appearance": "Limonite/Goethite pseudomorphs"},
+    "90_year": {"oxidation": "97%", "worth": "/data/data/com.termux/files/usr/bin/bash.02/kg", "danger": "Negligible", "appearance": "Metallic core nearly absent"},
+    "100_year": {"oxidation": "99.9%", "worth": "/data/data/com.termux/files/usr/bin/bash.00/kg", "danger": "None", "appearance": "Full molecular integration with local geology"}
+  },
+  "doi_link": "10.5281/zenodo.18354448",
+  "status": "HARDWIRED"
+}
