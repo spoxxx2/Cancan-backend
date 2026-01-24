@@ -3,52 +3,21 @@
 
 int main() {
     std::ofstream site("index.html");
-    site << "<!DOCTYPE html>\n<html lang='en'>\n<head>"
-         << "<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-         << "<title>CANCANKERN | FRO-001 Compliance Hub</title>"
-         << "<style>"
-         << "body { background:#0a0a0a; color:#00ff41; font-family:'Courier New', monospace; padding:20px; line-height:1.4; }"
-         << "nav { border-bottom: 2px solid #00ff41; padding:10px 0; margin-bottom:30px; display:flex; gap:15px; flex-wrap:wrap; }"
-         << "nav a { color:#00ff41; text-decoration:none; font-weight:bold; font-size:0.8em; border: 1px solid #333; padding: 5px; }"
-         << "nav a:hover { background:#00ff41; color:#000; }"
-         << ".card { border: 1px solid #333; padding:20px; margin-bottom:20px; background:#111; position:relative; }"
-         << ".tag { background:#00ff41; color:#000; padding:2px 5px; font-weight:bold; position:absolute; top:0; right:0; }"
-         << ".compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 10px; }"
-         << ".id-badge { border: 1px solid #444; padding: 10px; font-size: 0.85em; background: #000; }"
-         << "h2 { color:#e5e4e2; border-left: 5px solid #00ff41; padding-left:10px; margin-top:0; }"
-         << ".highlight { color: #fff; background: #222; padding: 2px; }"
+    site << "<!DOCTYPE html>\n<html><head><style>"
+         << "body { background:#0a0a0a; color:#00ff41; font-family:'Courier New'; padding:20px; }"
+         << ".compliance-header { border: 2px solid #00ff41; padding:15px; margin-bottom:20px; text-align:center; }"
+         << ".release-badge { background:#00ff41; color:#000; padding:5px; font-weight:bold; text-decoration:none; }"
+         << "h2 { border-bottom: 1px solid #333; padding-bottom:10px; }"
          << "</style></head><body>"
-         
-         << "<nav>"
-         << "<a href='#audits'>AUDITS</a><a href='#fro'>FOOD RECOVERY</a>"
-         << "<a href='#bsfl'>BSF PILOT</a><a href='#compliance'>COMPLIANCE</a>"
-         << "<a href='#contact'>CONTACT</a>"
-         << "</nav>"
-
-         << "<h1>CANCANKERN <span class='tag'>FRO-001</span></h1>"
-         << "<p class='highlight'>California Nonprofit Public Benefit Corp | Bakersfield, CA</p>"
-
-         << "<div id='compliance' class='card'><h2>🛡️ Verified Credentials</h2>"
-         << "<div class='compliance-grid'>"
-         << "<div class='id-badge'><b>SAM UEI:</b> SSWWJ3SEMZ73</div>"
-         << "<div class='id-badge'><b>Federal EIN:</b> 39-2361270</div>"
-         << "<div class='id-badge'><b>CA SOS Entity:</b> B20250155426</div>"
-         << "<div class='id-badge'><b>CDTFA ID:</b> 158-102480</div>"
-         << "<div class='id-badge'><b>Business Lic:</b> 187415 (Code 105)</div>"
+         << "<div class='compliance-header'>"
+         << "<h1>CANCANKERN ZENITH NODE 001</h1>"
+         << "<p><b>SAM UEI:</b> SSWWJ3SEMZ73 | <b>EIN:</b> 39-2361270</p>"
+         << "<a href='https://github.com/spoxxx2/cancankern-org/releases/tag/v1.5.0' class='release-badge'>VERIFIED RELEASE v1.5.0</a>"
          << "</div>"
-         << "<p style='margin-top:15px; font-size:0.8em;'><i>Authorized Environmental Service Provider & Compliance Auditor under BMC § 8.32.190.</i></p></div>"
-
-         << "<div id='audits' class='card'><h2>📋 Municipal & Grocery Audits</h2>"
-         << "<p>Tier 1 & 2 Generator compliance reporting. Current Archive: 318 Data Points.</p></div>"
-
-         << "<div id='fro' class='card'><h2>🍎 Food Recovery Organization</h2>"
-         << "<p>Facilitating SB 1383 edible food rescue. Status: ACTIVE/GOOD STANDING.</p></div>"
-
-         << "<div id='contact' class='card'><h2>📩 Operations</h2>"
-         << "<p><b>Principle Node:</b> 1501 Pearl St, Bakersfield, CA 93305</p>"
-         << "<p><b>Mailing:</b> 4408 Vern St, Bakersfield, CA 93307</p></div>"
-
-         << "<footer>© 2026 CANCANKERN™ | 501(c)(3) Environmental Stewardship</footer>"
+         << "<h2>🔍 Audit Vault</h2><p>318 Validated Digital Twins with 100-year decay matrices.</p>"
+         << "<h2>🍎 FRO Compliance</h2><p>Authorized Third-Party Compliance Auditor (BMC § 8.32.190).</p>"
+         << "<h2>🪰 BSFL Pilot</h2><p>Bio-Acoustic Monitoring Active at 1501 Pearl St.</p>"
+         << "<footer>© 2026 CANCANKERN™ | Bakersfield, CA</footer>"
          << "</body></html>";
     site.close();
     return 0;
