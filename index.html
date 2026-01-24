@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CANCANKERN | Zenith Matrix</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANCANKERN | Zenith Audit Portal</title>
+    <style>
+        :root { --neon: #00ff41; --bg: #0a0a0a; }
+        body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--neon); margin: 0; padding: 20px; line-height: 1.4; }
+        header { border-bottom: 2px solid var(--neon); padding-bottom: 10px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .vault-card { border: 1px solid #333; padding: 15px; background: #111; transition: 0.3s; }
+        .vault-card:hover { border-color: var(--neon); box-shadow: 0 0 10px var(--neon); }
+        .tag { font-size: 0.8em; background: var(--neon); color: #000; padding: 2px 5px; font-weight: bold; }
+        h2, h3 { color: #fff; text-transform: uppercase; }
+        .forecast-matrix { font-size: 0.85em; color: #888; }
+    </style>
 </head>
 <body>
-    <h1>CANCANKERN ZENITH NODE ACTIVE</h1>
-    <p>Status: 501(c)(3) Federal Compliance Node</p>
-    <p>Audit Location: 1501 Pearl St, 93305</p>
-    <p><i>100-Year Digital Twin Matrix in Progress...</i></p>
+    <header>
+        <h1>CANCANKERN <span class="tag">ZENITH-OVERLORD</span></h1>
+        <p>501(c)(3) ID: EIN & SAM VERIFIED | BMC § 8.32.190</p>
+    </header>
+
+    <div class="grid">
+        <div class="vault-card">
+            <h3>📂 Donation Receipts</h3>
+            <p>Secure vault for client tax-deduction records.</p>
+            <button onclick="alert('Accessing Encrypted Vault...')">View Records</button>
+        </div>
+
+        <div class="vault-card">
+            <h3>⚖️ Weight & Carbon Logs</h3>
+            <p>Current Offset: 1028.16 kg CO2e</p>
+            <p>Real-time diversion tracking active.</p>
+        </div>
+
+        <div class="vault-card">
+            <h3>🔥 Thermal Safety Photos</h3>
+            <p>Active monitoring of decomposition heat signatures.</p>
+            <span class="tag">STATUS: COOL</span>
+        </div>
+
+        <div class="vault-card">
+            <h3>⏳ 100-Year Digital Twin</h3>
+            <div class="forecast-matrix">
+                [2026] Initial Scan: 100% Value<br>
+                [2076] Mid-Point: 75% Oxidation<br>
+                [2126] Zenith: Total Entropy
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="margin-top: 40px; font-size: 0.7em; color: #444;">
+            © 2026 CANCANKERN™ | USPTO Patent Pending CC-KERN-2026 | BAK-LIC-93305
+        </p>
+    </footer>
 </body>
 </html>
