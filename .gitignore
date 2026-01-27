@@ -1,0 +1,4 @@
+*.json
+*.jpg
+node_modules/
+.vercel/
