@@ -8,45 +8,61 @@
 </head>
 <body class="bg-stone-50 text-stone-900 font-sans">
     <div class="max-w-4xl mx-auto py-12 px-6">
-        <header class="border-b-2 border-green-800 pb-4 mb-8">
-            <h1 class="text-3xl font-bold tracking-tighter">CANCAN KERN <span class="text-green-700">AUDIT</span></h1>
-            <p class="text-sm uppercase tracking-widest text-stone-500">Site: 1501 Pearl St, Bakersfield, CA</p>
+        <header class="border-b-2 border-green-800 pb-4 mb-8 flex justify-between items-end">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tighter">CANCAN KERN <span class="text-green-700">AUDIT</span></h1>
+                <p class="text-sm uppercase tracking-widest text-stone-500">Bakersfield, CA | 1501 Pearl St</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <p class="text-[10px] font-mono text-stone-400">LAT: 35.3813° N</p>
+                <p class="text-[10px] font-mono text-stone-400">LONG: 119.0063° W</p>
+            </div>
         </header>
+
+        <section class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="https://earth.google.com/web/search/1501+Pearl+St,+Bakersfield,+CA" target="_blank" 
+               class="md:col-span-2 bg-stone-900 text-white p-6 rounded-xl hover:bg-stone-800 transition-all flex flex-col justify-between group">
+                <div>
+                    <span class="text-xs font-bold text-green-400 uppercase tracking-widest">Google Earth Live</span>
+                    <h3 class="text-xl font-semibold">Launch 3D Digital Twin</h3>
+                </div>
+                <p class="mt-4 text-sm text-stone-400 group-hover:text-white">Click to view spectral overlay on global topography →</p>
+            </a>
+            <div class="bg-white p-6 rounded-xl border border-stone-200">
+                <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Precision</span>
+                <h3 class="text-xl font-semibold">± 0.2m</h3>
+                <p class="text-sm text-stone-500 mt-2">RTK-Grade Geolocation Active</p>
+            </div>
+        </section>
 
         <section class="bg-white p-8 rounded-xl shadow-sm border border-stone-200">
             <h2 class="text-xl font-bold mb-4 flex items-center">
-                <span class="mr-2">🧬</span> 100-Year Digital Twin Quintuplets
+                <span class="mr-2">🧬</span> Digital Twin Quintuplets (100-Year)
             </h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="p-4 bg-green-50 rounded-lg">
                     <p class="text-xs uppercase text-green-800 font-bold">Metadata Vectors</p>
                     <p class="text-2xl font-mono">400 Verified</p>
                 </div>
                 <div class="p-4 bg-blue-50 rounded-lg">
-                    <p class="text-xs uppercase text-blue-800 font-bold">Soil Pre-Workout Status</p>
-                    <p class="text-lg italic">"Ready for a comeback"</p>
+                    <p class="text-xs uppercase text-blue-800 font-bold">Eco-Wit Status</p>
+                    <p class="text-lg italic">"Pre-workout soil ready for comeback"</p>
                 </div>
             </div>
-
             <table class="w-full text-left text-sm font-mono">
                 <thead class="bg-stone-100">
-                    <tr>
-                        <th class="p-2">Year</th>
-                        <th class="p-2">Bio-Optimality</th>
-                        <th class="p-2">Status</th>
-                    </tr>
+                    <tr><th class="p-2">Year</th><th class="p-2">Bio-Optimality</th><th class="p-2">Status</th></tr>
                 </thead>
                 <tbody>
                     <tr><td class="p-2 border-b">2046</td><td class="p-2 border-b">118%</td><td class="p-2 border-b text-green-600">Sprouting</td></tr>
                     <tr><td class="p-2 border-b">2076</td><td class="p-2 border-b">154%</td><td class="p-2 border-b text-green-600">Thriving</td></tr>
-                    <tr><td class="p-2 border-b">2126</td><td class="p-2 border-b">210%</td><td class="p-2 border-b text-green-600">Apex Forest</td></tr>
+                    <tr><td class="p-2 border-b">2126</td><td class="p-2 border-b">210%</td><td class="p-2 border-b text-green-600">Apex</td></tr>
                 </tbody>
             </table>
         </section>
 
-        <footer class="mt-12 text-xs text-stone-400 text-center">
-            Synchronized via Spoxxx2 | Permanent DOI Pending
+        <footer class="mt-12 text-[10px] text-stone-400 text-center uppercase tracking-[0.2em]">
+            Precision Environmental Audit • 1501 Pearl St • Kern County
         </footer>
     </div>
 </body>
