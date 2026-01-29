@@ -1,4 +1,39 @@
-*.json
-*.jpg
-node_modules/
-.vercel/
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python cache and virtualenvs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+env/
+venv/
+
+# Ignore shell history and temp files
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# Ignore Termux/Android artifacts
+*.log
+*.pid
+
+# Ignore watcher outputs and staging clutter
+segjpeg=*
+segment_*.jpeg
+segment_*.pdf
+
+# Ignore local audit logs and daily dumps
+daily/
+days/
+public_log/
+engine/
+
+# Keep transcripts and civic artifacts
+!docs/*.md
+!docs/*.pdf
+!docs/*.jpeg
